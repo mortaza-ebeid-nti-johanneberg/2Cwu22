@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+}
+
+#container {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 15% 15%;
+    margin: 0px;
+    grid-template-areas:
+    'hd'
+    'nv'
+    'mn'
+}
+
+#websiteHeader {
+    grid-area: hd;
+    background: blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#logoDiv {
+    background: greenyellow;
+}
+
+#pageNav {
+    background: rebeccapurple;
+}
+
+#searchNav {
+    grid-area: nv;
+    background: red;
+}
+
+main {
+    grid-area: mn;
+    background: green;
+}
