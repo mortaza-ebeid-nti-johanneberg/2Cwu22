@@ -1,15 +1,24 @@
+/* "general" css */
+
 body {
     margin: 0;
+    font-family: 'Orbitron', 'Russo One', 'Press Start 2P', cursive, sans-serif;
 }
 
-#container {
+#updatesContainer {
     display: grid;
-    height: 100vh;
-    grid-template-rows: 15% 15%;
-    margin: 0px;
+    grid-template-rows: 7rem;
     grid-template-areas:
     'hd'
     'nv'
+    'mn'
+}
+
+#aboutContainer {
+    display: grid;
+    grid-template-rows: 7rem;
+    grid-template-areas:
+    'hd'
     'mn'
 }
 
@@ -18,7 +27,7 @@ body {
     background: blue;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content:space-around;
     align-items: center;
 }
 
@@ -26,8 +35,25 @@ body {
     background: greenyellow;
 }
 
+#navLogo {
+    width: 5rem;
+}
+
 #pageNav {
     background: rebeccapurple;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.pageButton {
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.pageButtonText {
+    font-size: large;
+
 }
 
 #searchNav {
@@ -35,7 +61,53 @@ body {
     background: red;
 }
 
-main {
+#mainSection {
     grid-area: mn;
     background: green;
+}
+
+/* About us page css */
+
+.leftArticle {
+    background: grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.rightArticle {
+    background: pink;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+}
+
+.aboutImage {
+    width: 35vw;
+    margin: 1rem;
+}
+
+.aboutText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    text-align: center;
+}
+
+.fancyText {
+    font-family: 'Monoton';
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    font-size: 2rem;
+    color: black;
+    font-weight: 400;
+}
+
+.aboutBodyText {
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    line-height: 150%;
 }
