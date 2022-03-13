@@ -22,6 +22,13 @@ body {
     'mn'
 }
 
+#mainSection {
+    grid-area: mn;
+    background: green;
+}
+
+/* top Nav section css */
+
 #websiteHeader {
     grid-area: hd;
     background: blue;
@@ -53,17 +60,17 @@ body {
 
 .pageButtonText {
     font-size: large;
+    color: black;
+    text-decoration: none;
+}
 
+:hover.pageButtonText {
+    color: rgb(37, 37, 37);
 }
 
 #searchNav {
     grid-area: nv;
     background: red;
-}
-
-#mainSection {
-    grid-area: mn;
-    background: green;
 }
 
 /* About us page css */
@@ -97,6 +104,12 @@ body {
     text-align: center;
 }
 
+.aboutBodyText {
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    line-height: 150%;
+}
+
 .fancyText {
     font-family: 'Monoton';
     letter-spacing: 3px;
@@ -104,10 +117,4 @@ body {
     font-size: 2rem;
     color: black;
     font-weight: 400;
-}
-
-.aboutBodyText {
-    letter-spacing: 2px;
-    word-spacing: 3px;
-    line-height: 150%;
 }
