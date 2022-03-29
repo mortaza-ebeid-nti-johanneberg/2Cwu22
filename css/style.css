@@ -24,7 +24,7 @@ body {
 
 #mainSection {
     grid-area: mn;
-    background: green;
+    background: rgb(110, 110, 110);
 }
 
 /* top Nav section css */
@@ -71,6 +71,66 @@ body {
 #searchNav {
     grid-area: nv;
     background: red;
+}
+
+/* Updates Feed masonry */
+
+.masonry {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.masonryItem {
+    position: relative;
+    background: rgb(221, 221, 221);
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    'img'
+    'txt'
+}
+
+.articleImgDiv {
+    grid-area: 'img';
+    margin: 5px;
+}
+
+.articleImg {
+    width: 100%;
+}
+
+.articleText {
+    grid-area: 'txt';
+    display: flex;
+    flex-flow: column;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    padding: 0.5rem;
+}
+
+.articleTitle {
+    margin: 0;
+    font-size: large;
+}
+
+.articleContent {
+    margin: 0;
+    font-size: medium;
+}
+
+.articleCategories, .articleDate {
+    margin: 0;
+    font-size: smaller;
+    color: rgb(88, 88, 88);
 }
 
 /* About us page css */

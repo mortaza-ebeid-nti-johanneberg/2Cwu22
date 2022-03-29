@@ -1,60 +1,211 @@
-// article = [Title, Date (year-month-day) , Image-path, Categories-array, Text/Content]
-/* indexes:
-0 = Title
-1 = Date
-2 = Image-path
-3 = Categories-array
-4 = Text
-*/
-
-
-let text0 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
-const article0 = ["first article!", [1985, 12, 10], "img/colossalMonkey.jpg", ["milestone", "plans"], text0]
-
-let text1 = "Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut."
-const article1 = ["second article", [2004,8,6], "img/colossalMonkey.jpg", ["lighting", "storyboard"], text1]
-
-let text2 = "imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut"
-const article2 = ["third article", [2016,1,1], "img/colossalMonket.jpg", ["plans", "summary"], text2]
-
-let text3 = "metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum"
-const article3 = ["fourth article", [2021, 11, 23], "img/colossalMonkey.jpg", ["characters", "music", "sound design"], text3]
-
-const articles = [article0, article1, article2]
-
-// get searchResults array (array with indexes of articles in 'articles' array that match with search input)
-let searchResults = [0, 1, 3]
-
-for (const index of searchResults) {
-    // code that adds css and html for articles in searchResult
-
-    // html
-
-    // create article block with content
-    var articleTag = document.createElement("article");
-
-    // add img tag
-    var img = document.createElement("img");
-    img.href = String( articles[index][2] );
-
-    articleTag.appendChild(img)
-
-    // add title and text tags
-    var title = document.createElement("p");
-    var titleText = document.createTextNode( String( articles[index][0] ) );
-    title.appendChild(titleText)
-
-    var content = document.createElement("p");
-    var contentText = document.createTextNode( String( articles[index][4] ) );
-    content.appendChild(contentText);
-
-    articleTag.appendChild(title);
-    articleTag.appendChild(text);
-
-    // add article block to main section
-    var mainElement = document.getElementById("updatesFeedMain");
-    mainElement.appendChild(articleTag);
-
-
-    //css
+let text0 = "Word. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."
+const article0 = {
+    title: "first article",
+    date: [1985, 12, 10],
+    image: "img/colossalMonket.jpg",
+    categories: ["milestone", "plans"],
+    content: text0
 }
+
+let text1 = "This is also a test! Vulputate eget, arcu. In enim justo, rhoncus ut. Word"
+const article1 = {
+    title: "it is!",
+    date: [2004, 8, 6],
+    image: "img/colossalMonket.jpg",
+    categories: ["lighting", "storyboard"],
+    content: text1
+}
+
+let text2 = "The blue pill will grant you unfathomable power, the red will make you invisible. Quis, feugiat a, tellus. Phasellus viverra nulla ut. Word"
+const article2 = {
+    title: "will you take the blue pill or the red pill?",
+    date: [2016, 1, 1],
+    image: "img/colossalMonket.jpg",
+    categories: ["plans", "summary"],
+    content: text2
+}
+
+let text3 = "What you're reading is text, and this is a test. Metus varius laoreet. Quisque rutrum. Aenean imperdiet."
+const article3 = {
+    title: "fourth article",
+    date: [2021, 11, 23],
+    image: "img/colossalMonkey.jpg",
+    categories: ["characters", "music", "sound design"],
+    content: text3
+}
+
+const articles = [article0, article1, article2, article3];
+
+const titleIndex = 0;
+const dateIndex = 1;
+const imageIndex = 2;
+const categoryIndex = 3;
+const contentIndex = 4;
+
+// let searchResults = articles;
+
+// Create searchResults array and fill with objects {id: index, relevence: 0, date: []}
+function resetSearchResults() {
+    let searchResults = []
+    for (let i = 0; i < articles.length; i++) {
+        obj = {id: i, relevence: 0, date: []};
+        searchResults.push(obj);
+    }
+    return searchResults
+}
+
+let searchResults = resetSearchResults();
+
+console.log(searchResults);
+
+function filterArticles(searchTerm) {
+    //searchResults = [];
+    // Reset searchResults
+    searchResults = [];
+    for (let i = 0; i < articles.length; i++) {
+        obj = {id: i, relevence: 0, date: []};
+        searchResults.push(obj);
+    }
+
+    // Make array of search terms
+    let searchTerms = searchTerm.toLowerCase().split(/[\s,!/]+/);
+
+    // For each term: search for matches
+    searchTerms.forEach(term => {
+        // For each article: search for matches
+        for (let i = 0; i < articles.length; i++) {
+
+            // Splits information into arrays to go through
+            let content = articles[i].content.toLowerCase().split(/[\s,!/]+/);
+            let title = articles[i].title.toLowerCase().split(/[\s,!/]+/);
+            let categories = articles[i].categories
+            let date = articles[i].date
+
+            // content search
+            for (let t = 0; t < content.length; t++) {
+                if (term == content[t]) {
+                    searchResults[i].relevence++;
+                    searchResults[i].date = date;
+                }
+            }
+
+
+            // title search
+            for (let t = 0; t < title.length; t++) {
+                if (term == title[t]) {
+                    searchResults[i].relevence++;
+                    searchResults[i].date = date;
+                }
+            }
+
+            // categories search
+            for (let t = 0; t < categories.length; t++) {
+                if (term == categories[t].toLowerCase()) {
+                    searchResults[i].relevence++;
+                    searchResults[i].date = date;
+                }
+            }
+
+            // date search
+            for (let t = 0; t < date.length; t++) {
+                if (term == date[t]) {
+                    searchResults[i].relevence++;
+                    searchResults[i].date = date;
+                }
+            }
+        }
+    })
+
+    return searchResults;
+}
+
+console.log(filterArticles("Word"));
+
+//console.log("test 123! hello/hi".split(/[\s,!/]+/));
+
+function generateDummyPosts(amount) {
+    let articles = [];
+    for (let i = 0; i < amount; i++) {
+        let item = {
+            title: `title${i}`,
+            image: "img/colossalMonkey.jpg",
+            content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+            date: [2021, 8, 6],
+            categories: ["lighting", "plans", "Milestone"]
+        }
+
+        articles.push(item);
+    }
+
+    return articles
+}
+
+let filteredArticles = generateDummyPosts(15);
+
+function generateMasonryGrid(columns, articles) {
+    const masonry = document.querySelector('.masonry');
+    masonry.innerHTML = '';
+
+    // Stores arrays that store appropriate articles for each column
+    let columnWrappers = {};
+    for (let i = 0; i < columns; i++) {
+        columnWrappers[`column${i}`] =  []
+    }
+
+    // Stores articles in column arrays
+    for (let i = 0; i < articles.length; i++) {
+        const column = i % columns;
+        columnWrappers[`column${column}`].push(articles[i]);
+    }
+
+    // Creates html elements
+    for (let i = 0; i < columns; i++) {
+        let column = document.createElement('div');
+        column.classList.add('column');
+        let columnArticles = columnWrappers[`column${i}`];
+
+        columnArticles.forEach(article => {
+            let masonryItem = document.createElement('div');
+            masonryItem.classList.add('masonryItem')
+
+            let articleImgDiv = document.createElement('div');
+            articleImgDiv.classList.add('articleImgDiv');
+
+            let articleImg = document.createElement('img');
+            articleImg.classList.add('articleImg');
+            articleImg.src = article.image;
+
+            let articleText = document.createElement('div');
+            articleText.classList.add('articleText');
+
+            let articleDate = document.createElement('p');
+            articleDate.classList.add('articleDate');
+            let stringDate = new Array(1).fill(article.date[0])
+            for (let t = 0; t < article.date.length; t++) {
+                
+            }
+            articleDate.innerHTML = 
+
+            let articleTitle = document.createElement('p');
+            articleTitle.classList.add('articleTitle');
+            articleTitle.innerText = article.title;
+
+            let articleContent = document.createElement('p');
+            articleContent.classList.add('articleContent');
+            articleContent.innerText = article.content;
+
+            articleImgDiv.appendChild(articleImg);
+            masonryItem.appendChild(articleImgDiv);
+
+            articleText.appendChild(articleTitle);
+            articleText.appendChild(articleContent);
+            masonryItem.appendChild(articleText);
+            column.appendChild(masonryItem);
+        })
+
+        masonry.appendChild(column);
+    }
+}
+
+generateMasonryGrid(4, filteredArticles);
+*/
