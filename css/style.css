@@ -1,5 +1,16 @@
 /* "general" css */
 
+:root {
+    --border-radius: 10px;
+    --backgroundColor: hsl(217, 45%, 92%);
+    --highlightColor: hsl(223, 50%, 96%);
+    --shadowColor: hsl(209, 39%, 80%);
+    --dark-color: hsl(208, 13%, 49%);
+    --box-shadow-button: -3px -3px 5px var(--highlightColor), 3px 3px 5px var(--shadowColor);
+    --box-shadow-inset: inset 3px 3px 5px var(--shadowColor), inset 3px 3px 7px var(--shadowColor);
+    --box-shadow-down: inset 3px 3px 8px var(--shadowColor);
+}
+
 body {
     margin: 0;
     font-family: 'Orbitron', 'Russo One', 'Press Start 2P', cursive, sans-serif;
@@ -24,22 +35,19 @@ body {
 
 #mainSection {
     grid-area: mn;
-    background: rgb(110, 110, 110);
+    background: var(--backgroundColor);
+    box-shadow: var(--box-shadow-down);
 }
 
 /* top Nav section css */
 
 #websiteHeader {
     grid-area: hd;
-    background: blue;
+    background: var(--backgroundColor);
     display: flex;
     flex-direction: row;
     justify-content:space-around;
     align-items: center;
-}
-
-#logoDiv {
-    background: greenyellow;
 }
 
 #navLogo {
@@ -47,30 +55,98 @@ body {
 }
 
 #pageNav {
-    background: rebeccapurple;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    gap: 10vw;
 }
 
 .pageButton {
-    margin-left: 4rem;
-    margin-right: 4rem;
+    background-color: var(--backgroundColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-button);
 }
 
 .pageButtonText {
     font-size: large;
     color: black;
     text-decoration: none;
+    margin: 10px 20px;
 }
 
 :hover.pageButtonText {
-    color: rgb(37, 37, 37);
+    color: var(--dark-color);
 }
+
+/* Search bar */
 
 #searchNav {
     grid-area: nv;
-    background: red;
+    background: var(--backgroundColor);
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+#searchButton {
+    border: none;
+    background-color: var(--backgroundColor);
+    min-width: 46px;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    margin-right: 12px;
+    box-shadow: var(--box-shadow-button);
+}
+
+#searchSvg {
+    color: var(--dark-color);
+    height: 1.5rem;
+}
+
+.inputContainer {
+    width: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+#searchBar {
+    text-decoration: none;
+    background-color: var(--backgroundColor);
+    padding: 1rem 2rem;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    color: #a9b8c9;
+    transition: all 240ms ease-out;
+    width: 100%;
+    box-shadow: var(--box-shadow-inset);
+}
+
+#searchBar::placeholder {
+    color: var(--dark-color);
+}
+
+#searchBar:focus {
+    outline: none;
+    color: var(--dark-color);
+    background-color: lighten(#e3edf7, 4%);
+}
+
+@media screen and (max-width: 800px) {
+    .pageButton {
+        display: none;
+    }
+    
+    .pageButtonText {
+        display: none;
+    }
 }
 
 /* Updates Feed masonry */
@@ -90,8 +166,10 @@ body {
 
 .masonryItem {
     position: relative;
-    background: rgb(221, 221, 221);
-    width: 100%;
+    width: 95%;
+    background-color: var(--backgroundColor);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-button);
     display: grid;
     grid-template-areas: 
     'img'
@@ -135,8 +213,12 @@ body {
 
 /* About us page css */
 
+#topArticle {
+    box-shadow: var(--box-shadow-down);
+}
+
 .leftArticle {
-    background: grey;
+    background: var(--backgroundColor);
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -144,7 +226,7 @@ body {
 }
 
 .rightArticle {
-    background: pink;
+    background: var(--backgroundColor);
     display: flex;
     flex-direction: row;
     justify-content: end;

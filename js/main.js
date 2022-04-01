@@ -34,29 +34,28 @@ const article3 = {
     content: text3
 }
 
-const articles = [article0, article1, article2, article3];
+const articles = [article0, article1, article2, article3, article0, article1, article2];
+
+var searchResults;
+var columns;
 
 // Create searchResults array and fill with objects: {id: ${index}, relevence: 0, date: []}
 function resetSearchResults() {
-    let searchResults = [];
-    for (let i = 0; i < articles.length; i++) {
-        obj = {id: i, relevence: 0, date: []};
-        searchResults.push(obj);
-    }
-
-    return searchResults;
-}
-
-function search(searchTerm) {
-    // Reset searchResults
     searchResults = [];
     for (let i = 0; i < articles.length; i++) {
         obj = {id: i, relevence: 0, date: []};
         searchResults.push(obj);
     }
+}
+
+// Takes in searchTerm and checks each article for matches
+// (adds relevence points and date to searchResults)
+function searchData(searchTerm) {
+    // Reset searchResults
+    resetSearchResults();
 
     // Make array of search terms
-    let splicedTerms = searchTerm.toLowerCase().split(/[\s,!/]+/);
+    let splicedTerms = searchTerm.toLowerCase().split(/[\s,-_"#%()+*^|><@$&=~?!/]+/);
     let searchTerms = [];
 
     // Remove empty strings: ""
@@ -70,8 +69,8 @@ function search(searchTerm) {
         for (let i = 0; i < articles.length; i++) {
 
             // Splits information into arrays to go through
-            let content = articles[i].content.toLowerCase().split(/[\s.,!/]+/);
-            let title = articles[i].title.toLowerCase().split(/[\s.,!/]+/);
+            let content = articles[i].content.toLowerCase().split(/[\s,-_"#%()+*^|><@$&=~?!/]+/);
+            let title = articles[i].title.toLowerCase().split(/[\s,-_"#%()+*^|><@$&=~?!/]+/);
             let categories = articles[i].categories.map(element => element.toLowerCase());
             let date = articles[i].date;
 
@@ -109,17 +108,15 @@ function search(searchTerm) {
             }
         }
     })
-
-    return searchResults;
 }
 
 // Sort by relevence
-function sortByRelevence(searchResults) {
-    return searchResults.sort((a, b) => b.relevence - a.relevence);
+function sortByRelevence() {
+    searchResults = searchResults.sort((a, b) => b.relevence - a.relevence);
 }
 
 // Sort by newest
-function sortByNewest(searchResults) {
+function sortByNewest() {
     for (let i = 0; i < searchResults.length; i++) {
         let stringDate = searchResults[i].date[0];
         for (let t = 1; t < searchResults[i].date.length; t++) {
@@ -137,12 +134,10 @@ function sortByNewest(searchResults) {
         arrayDate.push(parseInt(searchResults[i].date.substr(6, 2)));
         searchResults[i].date = arrayDate;
     }
-
-    return searchResults
 }
 
 // Sort by oldest
-function sortByOldest(searchResults) {
+function sortByOldest() {
     for (let i = 0; i < searchResults.length; i++) {
         let stringDate = searchResults[i].date[0];
         for (let t = 1; t < searchResults[i].date.length; t++) {
@@ -160,30 +155,35 @@ function sortByOldest(searchResults) {
         arrayDate.push(parseInt(searchResults[i].date.substr(6, 2)));
         searchResults[i].date = arrayDate;
     }
-
-    return searchResults
 }
+
+// Deletes elements that have no matches with search term
+function deleteIrrelevant() {
+    while (searchResults[searchResults.length - 1].relevence < 1) searchResults.pop();
+}
+
 
 // Generate dummy posts
-function generateDummyPosts(amount) {
-    let articles = [];
-    for (let i = 0; i < amount; i++) {
-        let item = {
-            title: `title${i}`,
-            image: "img/colossalMonkey.jpg",
-            content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-            date: [2021, 8, 6],
-            categories: ["lighting", "plans", "Milestone"]
-        }
+// function generateDummyPosts(amount) {
+//     let articles = [];
+//     for (let i = 0; i < amount; i++) {
+//         let item = {
+//             title: `title${i}`,
+//             image: "img/colossalMonkey.jpg",
+//             content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+//             date: [2021, 8, 6],
+//             categories: ["lighting", "plans", "Milestone"]
+//         }
 
-        articles.push(item);
-    }
+//         articles.push(item);
+//     }
 
-    return articles
-}
+//     return articles
+// }
+
 
 // Generate masonry
-function generateMasonryGrid(columns, articles) {
+function generateMasonry(columns, articles) {
     const masonry = document.querySelector('.masonry');
     masonry.innerHTML = '';
 
@@ -233,11 +233,11 @@ function generateMasonryGrid(columns, articles) {
 
             let articleTitle = document.createElement('p');
             articleTitle.classList.add('articleTitle');
-            articleTitle.innerText = article.title;
+            articleTitle.innerText = (article.title).toUpperCase();
 
             let articleContent = document.createElement('p');
             articleContent.classList.add('articleContent');
-            articleContent.innerText = article.content;
+            articleContent.innerText = (article.content[0]).toUpperCase() + (article.content.substr(1)).toLowerCase();
 
             let articleCategories = document.createElement('p');
             articleCategories.classList.add('articleCategories');
@@ -279,29 +279,60 @@ function generateMasonryGrid(columns, articles) {
     }
 }
 
-let searchResults = resetSearchResults();
-console.log(searchResults);
+var filteredArticles = articles;
 
-searchResults = search("Word");
-console.log(searchResults);
+// Recalculates columns (and redraws masonry)
+function setColumns() {
+    let screenWidth = window.innerWidth;
+    console.log(screenWidth);
+    columns = Math.ceil(screenWidth / 400);
 
-searchResults = sortByRelevence(searchResults);
-console.log(searchResults);
-
-searchResults = sortByNewest(searchResults);
-console.log(searchResults);
-
-searchResults = sortByOldest(searchResults);
-console.log(searchResults);
-
-searchResults = resetSearchResults();
-console.log(searchResults);
-
-
-let filteredArticles = []
-for (let i = 0; i < searchResults.length; i++) {
-    filteredArticles.push(articles[searchResults[i].id])
+    generateMasonry(columns, filteredArticles);
 }
-console.log(filteredArticles)
 
-generateMasonryGrid(3, filteredArticles);
+// Creates masonry/articles on start
+setColumns();
+generateMasonry(columns, filteredArticles);
+
+// If window is resized: recalculate columns 
+window.addEventListener("resize", setColumns);
+
+// If enter button is pressed && searchBar is in focus: filter/search articles
+const searchBar = document.getElementById('searchBar');
+searchBar.addEventListener("keypress", (e) => {
+    if (e.key == "Enter") {
+        updateSearch();
+    }
+})
+
+// If search button is pressed: filter/search articles
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener("click", updateSearch)
+
+function updateSearch() {
+    let input = document.getElementById('searchBar').value;
+
+    if (input != "") {
+        // Create searchResults var
+        resetSearchResults();
+
+        // Add relevences points and date to searchResults
+        searchData(String(input));
+
+        // Articles with most relevence points first
+        sortByRelevence();
+
+        // Delete articles with 0 relevence points
+        deleteIrrelevant();
+
+        // Setup filteredArticles var to feed Masonry function
+        filteredArticles = []
+        for (let i = 0; i < searchResults.length; i++) {
+            filteredArticles.push(articles[searchResults[i].id])
+        }
+
+        // Generate Masonry grid and HTML elements (articles)
+        generateMasonry(columns, filteredArticles);
+    }
+    else generateMasonry(columns, articles);
+}

@@ -7,16 +7,15 @@
     <title>Jikan Productions Blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@400;600;900&family=Press+Start+2P&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monofett&family=Monoton&family=Orbitron:wght@400;600;900&family=Press+Start+2P&family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
     <div id="updatesContainer">
 
         <header id="websiteHeader">
-            <div id="logoDiv">
-                <img src="img/colossalMonkey.jpg" alt="logo" id="navLogo">
-            </div>
+            <img src="img/colossalMonkey.jpg" alt="logo" id="navLogo">
             <nav id="pageNav">
                 <div class="pageButton">
                     <a href="http://127.0.0.1:5501/updatesFeed.html" class="pageButtonText">Updates Feed</a>
@@ -33,7 +32,16 @@
             </nav>
         </header>
 
-        <nav id="searchNav">Nav</nav>
+        <nav id="searchNav">
+            <button type="button" id="searchButton">
+                <svg id="searchSvg" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+            <div class="inputContainer">
+                <input placeholder="Search logs" id="searchBar"/>
+            </div>
+        </nav>
         
         <main id="mainSection" class="masonry"> <!--
             <div class="column">
@@ -58,77 +66,11 @@
                         <p class="articleContent">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>    
                     </div>
                 </article>
-            </div>
-
-            <div class="column">
-                <article class="masonryItem"> 
-                    <div class="articleImgDiv">
-                        <img src="img/colossalMonkey.jpg" alt="" class="articleImg">
-                    </div>
-                    <div class="articleText">
-                        <p class="articleTitle">first article!</p>
-                        <p class="articleContent">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>    
-                    </div>
-                </article>
-
-                <article class="masonryItem"> 
-                    <div class="articleImgDiv">
-                        <img src="img/colossalMonkey.jpg" alt="" class="articleImg">
-                    </div>
-                    <div class="articleText">
-                        <p class="articleTitle">first article!</p>
-                        <p class="articleContent">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>    
-                    </div>
-                </article>
-            </div>
-
-            <div class="column">
-                <article class="masonryItem"> 
-                    <div class="articleImgDiv">
-                        <img src="img/colossalMonkey.jpg" alt="" class="articleImg">
-                    </div>
-                    <div class="articleText">
-                        <p class="articleTitle">first article!</p>
-                        <p class="articleContent">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>    
-                    </div>
-                </article>
-
-                <article class="masonryItem"> 
-                    <div class="articleImgDiv">
-                        <img src="img/colossalMonkey.jpg" alt="" class="articleImg">
-                    </div>
-                    <div class="articleText">
-                        <p class="articleTitle">first article!</p>
-                        <p class="articleContent">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>    
-                    </div>
-                </article>
-            </div>
-
-            <div class="column">
-                <article class="masonryItem"> 
-                    <div class="articleImgDiv">
-                        <img src="img/colossalMonkey.jpg" alt="" class="articleImg">
-                    </div>
-                    <div class="articleText">
-                        <p class="articleTitle">first article!</p>
-                        <p class="articleContent">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>    
-                    </div>
-                </article>
-
-                <article class="masonryItem"> 
-                    <div class="articleImgDiv">
-                        <img src="img/colossalMonkey.jpg" alt="" class="articleImg">
-                    </div>
-                    <div class="articleText">
-                        <p class="articleTitle">first article!</p>
-                        <p class="articleContent">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>    
-                    </div>
-                </article>
             </div> -->
         </main>
 
     </div>
-    
+
     <script src="js/main.js"></script>
 </body>
 </html>
