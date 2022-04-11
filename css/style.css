@@ -1,14 +1,18 @@
 /* "general" css */
 
 :root {
-    --border-radius: 10px;
-    --backgroundColor: hsl(217, 45%, 92%);
+    --soft-radius: 22px;
+    --rough-radius: 16px;
+    --backgroundColor: white;
     --highlightColor: hsl(223, 50%, 96%);
-    --shadowColor: hsl(209, 39%, 80%);
-    --dark-color: hsl(208, 13%, 49%);
-    --box-shadow-button: -3px -3px 5px var(--highlightColor), 3px 3px 5px var(--shadowColor);
+    --shadowColor: rgb(220,220,220);
+    --dark-color: hsl(208, 0%, 27%);
+    --activeColor: rgb(235,236,236);
+    --textColor: rgb(32,33,36);
+    --faintText: rgb(70,70,70);
+    --box-shadow-button: -3px -3px 5px var(--shadowColor), 3px 3px 5px var(--shadowColor);
     --box-shadow-inset: inset 3px 3px 5px var(--shadowColor), inset 3px 3px 7px var(--shadowColor);
-    --box-shadow-down: inset 3px 3px 8px var(--shadowColor);
+    --box-shadow-down: inset 1px 1px 1px var(--shadowColor);
 }
 
 body {
@@ -16,7 +20,7 @@ body {
     font-family: 'Orbitron', 'Russo One', 'Press Start 2P', cursive, sans-serif;
 }
 
-#updatesContainer {
+#logsContainer {
     display: grid;
     grid-template-rows: 7rem;
     grid-template-areas:
@@ -29,6 +33,22 @@ body {
     display: grid;
     grid-template-rows: 7rem;
     grid-template-areas:
+    'hd'
+    'mn'
+}
+
+#roadmapContainer {
+    display: grid;
+    grid-template-rows: 7rem;
+    grid-template-areas:
+    'hd'
+    'mn'
+}
+
+#mediaContainer {
+    display: grid;
+    grid-template-rows: 7rem;
+    grid-template-areas: 
     'hd'
     'mn'
 }
@@ -46,7 +66,7 @@ body {
     background: var(--backgroundColor);
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -54,11 +74,16 @@ body {
     width: 5rem;
 }
 
-#pageNav {
+#buttonsContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    gap: 10vw;
+    gap: 2rem;
+}
+
+.pageButtonLink {
+    text-decoration: none;
+    color: var(--textColor);
 }
 
 .pageButton {
@@ -66,19 +91,81 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-button);
+    border-radius: var(--soft-radius);
 }
 
 .pageButtonText {
     font-size: large;
-    color: black;
-    text-decoration: none;
     margin: 10px 20px;
 }
 
-:hover.pageButtonText {
-    color: var(--dark-color);
+.pageButtonLink:hover .pageButton {
+    background: var(--activeColor);
+}
+
+/* Hambuger menu */
+
+#menuButton {
+    display: none;
+}
+
+#hamburgerMenu {
+    display: none;
+}
+
+#hamburgerMenu.show {
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,0.9);
+    position: fixed;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+}
+
+.menuPageButton {
+    text-decoration: none;
+    color: white;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+#closeButton {
+    position: fixed;
+    cursor: pointer;
+    top: inherit;
+    right: 5vw;
+}
+
+#closeIcon {
+    color: white;
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+    #menuIcon {
+        font-size: 2rem;
+    }
+
+    #menuButton {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 5vw;
+    }
+
+    .pageButtonLink, .pageButton, .pageButtonText, .buttonsContainer {
+        display: none;
+    }
+
+    #websiteHeader {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 /* Search bar */
@@ -100,60 +187,52 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--border-radius);
+    border-radius: var(--soft-radius);
     margin-right: 12px;
-    box-shadow: var(--box-shadow-button);
+    cursor: pointer;
 }
 
-#searchSvg {
+#searchButton:hover {
+    background: var(--activeColor);
+}
+
+#searchIcon {
     color: var(--dark-color);
-    height: 1.5rem;
+    width: 1.5rem;
 }
 
 .inputContainer {
     width: 100%;
-    border-radius: var(--border-radius);
+    border-radius: var(--rough-radius);
     overflow: hidden;
 }
 
 #searchBar {
     text-decoration: none;
-    background-color: var(--backgroundColor);
+    background-color: var(--activeColor);
     padding: 1rem 2rem;
     border: none;
     font-family: 'Orbitron', sans-serif;
     font-weight: 600;
-    color: #a9b8c9;
+    color: var(--faintText);
     transition: all 240ms ease-out;
     width: 100%;
-    box-shadow: var(--box-shadow-inset);
 }
 
 #searchBar::placeholder {
-    color: var(--dark-color);
+    color: var(--faintText);
 }
 
 #searchBar:focus {
     outline: none;
-    color: var(--dark-color);
-    background-color: lighten(#e3edf7, 4%);
+    color: var(--textColor);
 }
 
-@media screen and (max-width: 800px) {
-    .pageButton {
-        display: none;
-    }
-    
-    .pageButtonText {
-        display: none;
-    }
-}
-
-/* Updates Feed masonry */
+/* Logs masonry */
 
 .masonry {
     display: flex;
-    gap: 10px;
+    gap: 0.5rem;
     padding: 10px;
 }
 
@@ -161,38 +240,34 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1rem;
+    align-items: center;
 }
 
 .masonryItem {
     position: relative;
     width: 95%;
     background-color: var(--backgroundColor);
-    border-radius: var(--border-radius);
+    border-radius: var(--rough-radius);
     box-shadow: var(--box-shadow-button);
-    display: grid;
-    grid-template-areas: 
-    'img'
-    'txt'
 }
 
 .articleImgDiv {
-    grid-area: 'img';
     margin: 5px;
 }
 
 .articleImg {
     width: 100%;
+    border-radius: var(--rough-radius);
 }
 
 .articleText {
-    grid-area: 'txt';
+    gap: 0.5rem;
+    padding: 0.5rem;
     display: flex;
     flex-flow: column;
     align-items: start;
     justify-content: start;
-    gap: 10px;
-    padding: 0.5rem;
 }
 
 .articleTitle {
@@ -211,31 +286,68 @@ body {
     color: rgb(88, 88, 88);
 }
 
-/* About us page css */
+/* Media css */
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    border-radius: var(--rough-radius);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.overlayText {
+    color: white;
+}
+
+.masonryItem:hover .overlay {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+/* Roadmap css */
+
+
+
+/* About us css */
 
 #topArticle {
     box-shadow: var(--box-shadow-down);
 }
 
-.leftArticle {
+.leftArticle, .rightArticle {
     background: var(--backgroundColor);
     display: flex;
     flex-direction: row;
-    justify-content: start;
-    align-items: center;
-}
-
-.rightArticle {
-    background: var(--backgroundColor);
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
     align-items: center;
 }
 
 .aboutImage {
     width: 35vw;
     margin: 1rem;
+    border-radius: var(--rough-radius);
+}
+
+@media screen and (max-width: 800px) {
+    .aboutImage {
+        width: 90vw;
+    }
+    
+    .leftArticle {
+        flex-direction: column;
+    }
+    
+    .rightArticle {
+        flex-direction: column-reverse;
+    }
 }
 
 .aboutText {
