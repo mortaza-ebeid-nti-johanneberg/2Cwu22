@@ -28,27 +28,27 @@
     <div id="roadmapContainer">
 
         <header id="websiteHeader">
-            <img src="img/colossalMonkey.jpg" alt="logo" id="navLogo">
+            <img src="img/logga128.png" alt="logo" id="navLogo">
 
             <nav id="buttonsContainer">
                 <a href="http://127.0.0.1:5501/logs.html" class="pageButtonLink">
                     <div class="pageButton">
-                        <p class="pageButtonText">logs</p>
+                        <p class="buttonText">logs</p>
                     </div>
                 </a>
                 <a href="http://127.0.0.1:5501/roadmap.html" class="pageButtonLink">
                     <div class="pageButton">
-                        <p class="pageButtonText">roadmap</p>
+                        <p class="buttonText">roadmap</p>
                     </div>
                 </a>
                 <a href="http://127.0.0.1:5501/media.html" class="pageButtonLink">
                     <div class="pageButton">
-                        <p class="pageButtonText">media</p>
+                        <p class="buttonText">media</p>
                     </div>
                 </a>
                 <a href="http://127.0.0.1:5501/aboutUs.html" class="pageButtonLink">
                     <div class="pageButton">
-                        <p class="pageButtonText">about us</p>
+                        <p class="buttonText">about us</p>
                     </div>
                 </a>
             </nav>
@@ -58,16 +58,33 @@
             </div>
         </header>
 
-        <main id="mainSection">
-            <section class="sidebar">
-                <div class="pageButton">
-                    <p class="pageButtonText">logs</p>
-                </div>
+        <main id="roadmapMain">
+            <section class="sidebar"> <!--
+                <button type="button" id="allButton" class="sidebarButton selected">
+                    <p class="buttonText">all</p>
+                </button>
+
+                <button type="button" id="charactersButton" class="sidebarButton">
+                    <p class="buttonText">characters</p>
+                </button>
+
+                .
+                . -->
+            </section>
+
+            <section id="roadmapTextSection"> <!-- Handled by JS (js/roadmap.js):
+                <ul class="roadmapList">
+                    <li class="category00 category01">List entry content</li>
+                    .
+                    .
+                    .
+                </ul> -->
             </section>
         </main>
 
     </div>
 
+    <script src="js/roadmap.js"></script>
     <script src="js/hamburgerMeny.js"></script>
 </body>
 </html>

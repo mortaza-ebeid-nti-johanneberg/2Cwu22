@@ -1,18 +1,16 @@
 /* "general" css */
 
 :root {
-    --soft-radius: 22px;
-    --rough-radius: 16px;
+    --softRadius: 22px;
+    --roughRadius: 16px;
     --backgroundColor: white;
-    --highlightColor: hsl(223, 50%, 96%);
     --shadowColor: rgb(220,220,220);
-    --dark-color: hsl(208, 0%, 27%);
     --activeColor: rgb(235,236,236);
-    --textColor: rgb(32,33,36);
-    --faintText: rgb(70,70,70);
-    --box-shadow-button: -3px -3px 5px var(--shadowColor), 3px 3px 5px var(--shadowColor);
-    --box-shadow-inset: inset 3px 3px 5px var(--shadowColor), inset 3px 3px 7px var(--shadowColor);
-    --box-shadow-down: inset 1px 1px 1px var(--shadowColor);
+    --selectedColor: rgb(254,239,195);
+    --darkColor: rgb(32,33,36);
+    --darkerColor: rgb(70,70,70);
+    --itemBoxShadow: -3px -3px 5px var(--shadowColor), 3px 3px 5px var(--shadowColor);
+    --boxShadowDown: inset 1px 1px 1px var(--shadowColor);
 }
 
 body {
@@ -53,10 +51,10 @@ body {
     'mn'
 }
 
-#mainSection {
+#logsMain, #roadmapMain, #mediaMain, #aboutUsMain {
     grid-area: mn;
     background: var(--backgroundColor);
-    box-shadow: var(--box-shadow-down);
+    box-shadow: var(--boxShadowDown);
 }
 
 /* top Nav section css */
@@ -83,7 +81,7 @@ body {
 
 .pageButtonLink {
     text-decoration: none;
-    color: var(--textColor);
+    color: var(--darkColor);
 }
 
 .pageButton {
@@ -91,10 +89,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--soft-radius);
+    border-radius: var(--softRadius);
 }
 
-.pageButtonText {
+.buttonText {
     font-size: large;
     margin: 10px 20px;
 }
@@ -157,7 +155,7 @@ body {
         right: 5vw;
     }
 
-    .pageButtonLink, .pageButton, .pageButtonText, .buttonsContainer {
+    .pageButtonLink, .pageButton, .buttonText, .buttonsContainer {
         display: none;
     }
 
@@ -187,7 +185,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--soft-radius);
+    border-radius: var(--softRadius);
     margin-right: 12px;
     cursor: pointer;
 }
@@ -197,13 +195,13 @@ body {
 }
 
 #searchIcon {
-    color: var(--dark-color);
+    color: var(--darkerColor);
     width: 1.5rem;
 }
 
 .inputContainer {
     width: 100%;
-    border-radius: var(--rough-radius);
+    border-radius: var(--roughRadius);
     overflow: hidden;
 }
 
@@ -214,18 +212,18 @@ body {
     border: none;
     font-family: 'Orbitron', sans-serif;
     font-weight: 600;
-    color: var(--faintText);
+    color: var(--darkerColor);
     transition: all 240ms ease-out;
     width: 100%;
 }
 
 #searchBar::placeholder {
-    color: var(--faintText);
+    color: var(--darkerColor);
 }
 
 #searchBar:focus {
     outline: none;
-    color: var(--textColor);
+    color: var(--darkColor);
 }
 
 /* Logs masonry */
@@ -248,8 +246,8 @@ body {
     position: relative;
     width: 95%;
     background-color: var(--backgroundColor);
-    border-radius: var(--rough-radius);
-    box-shadow: var(--box-shadow-button);
+    border-radius: var(--roughRadius);
+    box-shadow: var(--itemBoxShadow);
 }
 
 .articleImgDiv {
@@ -258,7 +256,7 @@ body {
 
 .articleImg {
     width: 100%;
-    border-radius: var(--rough-radius);
+    border-radius: var(--roughRadius);
 }
 
 .articleText {
@@ -295,7 +293,7 @@ body {
     width: 100%;
     height: 100%;
     background: black;
-    border-radius: var(--rough-radius);
+    border-radius: var(--roughRadius);
 
     display: flex;
     align-items: center;
@@ -315,12 +313,81 @@ body {
 
 /* Roadmap css */
 
+#roadmapMain {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 
+    'bar txt'
+}
 
+#roadmapTextSection {
+    grid-area: txt;
+}
+
+.roadmapList {
+    line-height: 250%;
+}
+
+.listEntry {
+    display: none;
+}
+
+.listEntry.show {
+    display: list-item
+}
+
+.sidebar {
+    grid-area: bar;
+    margin-top: 1px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.sidebarButton {
+    border: 0;
+    background-color: var(--backgroundColor);
+    border-radius: var(--softRadius);
+    display: flex;
+}
+
+.sidebarButton:hover {
+    background-color: var(--activeColor);
+    cursor: pointer;
+}
+
+.sidebarButton.selected {
+    background-color: var(--selectedColor);
+}
+
+.buttonText {
+    font-family: 'Orbitron', 'Russo One', 'Press Start 2P', cursive, sans-serif;
+    display: block;
+}
+
+@media screen and (max-width: 800px) {
+    #roadmapMain {
+        grid-template-columns: 100%;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+        'bar'
+        'txt'
+    }
+
+    .sidebar, .sidebarButton, .buttonText {
+        width: 100%;
+    }
+
+    .sidebarButton:hover {
+        background-color: var(--backgroundColor);
+        cursor: pointer;
+    }
+}
 
 /* About us css */
 
 #topArticle {
-    box-shadow: var(--box-shadow-down);
+    box-shadow: var(--boxShadowDown);
 }
 
 .leftArticle, .rightArticle {
@@ -333,7 +400,7 @@ body {
 .aboutImage {
     width: 35vw;
     margin: 1rem;
-    border-radius: var(--rough-radius);
+    border-radius: var(--roughRadius);
 }
 
 @media screen and (max-width: 800px) {
