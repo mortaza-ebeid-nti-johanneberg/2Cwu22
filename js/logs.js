@@ -1,9 +1,37 @@
+/*
+this program works like this:
+- each log is an object and contains the following:
+'title' string
+'date' int array
+'image path' string
+'image alt tag' string
+'categories' string array
+'contents' string
+
+- put logs in array called articles
+- create searchResults array with objects for every log, searchResults contains:
+'log index (in articles array)' int
+'relevance points' int
+'date' empty array (for now)
+
+- add eventlistener to window resize and recalculate 'column' int value everytime window is resized (runs on start too)
+
+- add eventlisteneres and when search, run searchData function that adds relevance points and date to different logs depending on results
+- run sortByRelevance function, then deleteIrrelevant
+- (there should be a choice on the website for what to sort by and there are functions to do so but functionality has not been added yet)
+- feed filtered/searched logs array (filteredArticles) into generateMasonry function
+
+- generateMasonry takes in: 'columns' int & 'articles' array with objects
+- generates all HTML elements, adds classes, and handles nesting
+- run generateMasonry after every window resize and search input
+*/
+
 let text0 = "Word. word word word Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."
 const article0 = {
     title: "first article",
     date: [1985, 12, 10],
-    image: "img/colossalMonkey.jpg",
-    alt: "this is a picture of a big orange monkey plush toy in a white background",
+    image: "img/guitarGuyCompressed.jpg",
+    alt: "this is a black and white picture of an average looking blond guy looking down while holding a guitar in front of him but a little to the side, and the picture is taken from the front",
     categories: ["milestone", "plans"],
     content: text0
 }
@@ -12,18 +40,18 @@ let text1 = "This is also a test! Vulputate eget, arcu. In enim justo, rhoncus u
 const article1 = {
     title: "second it is!",
     date: [2004, 8, 6],
-    image: "img/colossalMonkey.jpg",
-    alt: "this is a picture of a big orange monkey plush toy in a white background",
+    image: "img/neonSignCompressed.jpg",
+    alt: "a wide lens picture of a neon sign surrounded by complete darkness that spells Franks, open late, and has a big arrow attached that points to the building",
     categories: ["lighting", "storyboard"],
     content: text1
 }
 
 let text2 = "The blue pill will grant you unfathomable power, the red will make you invisible. Quis, feugiat a, tellus. Phasellus viverra nulla ut. Word"
 const article2 = {
-    title: "third will you take the blue pill or the red pill?",
+    title: "third. will you take the blue pill or the red pill?",
     date: [2016, 1, 1],
-    image: "img/morot.jpg",
-    alt: "this is a picture of a gorilla munching on multiple carrots at once",
+    image: "img/plantCompressed.jpg",
+    alt: "this is a picture of three plants with big dark greenish leafs sitting in a orange pot",
     categories: ["plans", "summary"],
     content: text2
 }
@@ -32,13 +60,13 @@ let text3 = "Word. Word What you're reading is text, and this is a test. Metus v
 const article3 = {
     title: "fourth article",
     date: [2021, 11, 23],
-    image: "img/colossalMonkey.jpg",
-    alt: "this is a picture of a big orange monkey plush toy in a white background",
-    categories: ["characters", "music", "sound design"],
+    image: "img/yachtCompressed.jpg",
+    alt: "this is a picture of a yacht taken from on said yacht, with a narrow view of the sea, sky, and very saturated and fun colors",
+    categories: ["big-fix"],
     content: text3
 }
 
-const articles = [article0, article1, article2, article3, article0, article1, article2];
+const articles = [article0, article1, article2, article3, article1, article0, article3, article1];
 
 var searchResults;
 var columns;
@@ -59,7 +87,7 @@ function searchData(searchTerm) {
     resetSearchResults();
 
     // Make array of search terms
-    let splicedTerms = searchTerm.toLowerCase().split(/[\s,-_"#%()+*^|><@$&=~?!/]+/);
+    let splicedTerms = searchTerm.toLowerCase().split(/[\s,\-_"#%()+*^|><@$&=~?!/]+/);
     let searchTerms = [];
 
     // Remove empty strings: ""
@@ -73,8 +101,8 @@ function searchData(searchTerm) {
         for (let i = 0; i < articles.length; i++) {
 
             // Splits information into arrays to go through
-            let content = articles[i].content.toLowerCase().split(/[\s,-_"#%()+*^|><@$&=~?!/]+/);
-            let title = articles[i].title.toLowerCase().split(/[\s,-_"#%()+*^|><@$&=~?!/]+/);
+            let content = articles[i].content.toLowerCase().split(/[\s,\-_"#%()+*^|><@$&=~?!/]+/);
+            let title = articles[i].title.toLowerCase().split(/[\s,\-_"#%()+*^|><@$&=~?!/]+/);
             let categories = articles[i].categories.map(element => element.toLowerCase());
             let date = articles[i].date;
 
@@ -284,6 +312,7 @@ function generateMasonry(columns, articles) {
     }
 }
 
+// Equal to articles for startup (print out all logs with no filtering on startup)
 var filteredArticles = articles;
 
 // Recalculates columns (and redraws masonry)

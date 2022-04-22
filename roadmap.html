@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
     <title>Jikan Productions Blog</title>
+    <link rel="preload" as="font">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Monofett&family=Monoton&family=Orbitron:wght@400;600;900&family=Press+Start+2P&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@400;600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
         <a href="http://127.0.0.1:5501/aboutUs.html" class="menuPageButton">about us</a>
 
         <div id="closeButton">
-            <i class="material-icons" id="closeIcon">close</i>
+            <span class="material-icons" id="closeIcon">close</span>
         </div>
     </nav>
 
@@ -54,27 +54,24 @@
             </nav>
 
             <div id="menuButton">
-                <i class="material-icons" id="menuIcon">menu</i>
+                <span class="material-icons" id="menuIcon">menu</span>
             </div>
         </header>
 
         <main id="roadmapMain">
-            <section class="sidebar"> <!--
-                <button type="button" id="allButton" class="sidebarButton selected">
-                    <p class="buttonText">all</p>
+            <section class="sidebar"> <!-- Handled by JS (js/roadmap.js):
+                <button type="button" class="sidebarButton (depends: selected)">
+                    <p class="buttonText">button name/category (ex: all, milestone, bugs)</p>
                 </button>
-
-                <button type="button" id="charactersButton" class="sidebarButton">
-                    <p class="buttonText">characters</p>
-                </button>
-
+                .
                 .
                 . -->
             </section>
 
             <section id="roadmapTextSection"> <!-- Handled by JS (js/roadmap.js):
                 <ul class="roadmapList">
-                    <li class="category00 category01">List entry content</li>
+                    <li class="category00 category01 (ex: milestone, bugs)">List entry content</li>
+                    <li class="category00 category03 show">List entry content</li>
                     .
                     .
                     .

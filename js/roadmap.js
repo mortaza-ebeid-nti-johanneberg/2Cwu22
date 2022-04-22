@@ -1,16 +1,28 @@
+/*
+this program works like this:
+- each post is an object that contains 'categories' string array and 'contents' string
+- put posts in array called posts
+- create array with all the different categories (no doubles)
+- create list entries (nodes), add their categories as classes, nest in document
+- create all button and a button for every category (nodes, classes, then nest)
+- create array with all the selected cateogories (and 'all', if selected)
+- add eventlisteners and when clicked: toggle button/category value in selectedCategories array
+- refeed selectedCategories into a function that adds and removes '.show' class to list entries depending on selected categories
+*/
+
 let post00 = {
     categories: ["story", "milestone"],
-    contents: "lorem lorem ipsum bananas"
+    contents: "the story needs to reach a new milestone! (category: story and milestone)"
 }
 
 let post01 = {
     categories: ["graphics"],
-    contents: "ray-traced bananas will be added to the game"
+    contents: "ray-traced bananas will be added to the game (cateogry: graphics)"
 }
 
 let post02 = {
     categories: ["bugs", "graphics"],
-    contents: "bananas not working"
+    contents: "banana rendering not working (category: bugs and graphics)"
 }
 
 const posts = [post00, post01, post02]
@@ -75,7 +87,7 @@ function createSidebarButtons() {
     for (let i = 0; i < categories.length; i++) {
 
         // HTML FORMAT:
-        // <button type="button" id="allButton" class="sidebarButton">
+        // <button type="button" class="sidebarButton">
         //     <p class="buttonText">all</p>
         // </button>
 
@@ -83,7 +95,6 @@ function createSidebarButtons() {
         let sidebarButton = document.createElement('button')
         sidebarButton.type = 'button'
         sidebarButton.classList.add('sidebarButton')
-        sidebarButton.setAttribute('id', categories[i].toLowerCase() + 'Id')
 
         let buttonText = document.createElement('p')
         buttonText.classList.add('buttonText')
@@ -126,8 +137,6 @@ function createSidebarButtons() {
 }
 
 function recalculateSelected() {
-    console.log(selectedCategories)
-
     if (selectedCategories.includes("all")) {
         for (let i = 0; i < posts.length; i++) {
             listEntries[i].classList.add('show')
@@ -171,16 +180,3 @@ createListEntries()
 listEntries = document.querySelector('.roadmapList').childNodes
 createSidebarButtons()
 recalculateSelected()
-
-
-/*
-Something like this:
-// create all content items with category classes
-// create arrays with elements (list items) for corresponding buttons/categories
-// "toggle" .show when button is pressed
-// (
-// in css: 
-// .roadmapItem {display: none;}
-// .roadmapItem.show {display: list-item}
-// )
-*/
